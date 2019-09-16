@@ -17,4 +17,4 @@ branches:
     - source
 env:
   global:
-    - GH_REF: github.com/AlanDecode/alandecode.github.io.git
+    - GH_REF: github.com/hupoliuguang/hupoliuguang.github.io.git
