@@ -1,17 +1,11 @@
 language: node_js
 node_js: stable
-cache:
-    apt: true
-    directories:
-        - node_modules 
 before_install:
     - export TZ='Asia/Shanghai' # 更改时区
     - npm install hexo-cli -g  # 安装hexo环境
 install:
   - npm install
-  - npm rebuild node-sass
 script:
-  - hexo clean 
   - hexo g
 after_script:
   - cd ./public
