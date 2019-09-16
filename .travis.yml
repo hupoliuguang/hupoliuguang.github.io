@@ -19,4 +19,4 @@ branches:
 env:
   global:
     - GH_REF: github.com/hupoliuguang/hupoliuguang.github.io.git
-    - CO_REF: git.coding.net/hupoliuguang/hupoliuguang.coding.me.git
+    - CO_REF: git.dev.tencent.com/hupoliuguang/hupoliuguang.git
