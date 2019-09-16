@@ -1,8 +1,17 @@
 language: node_js
 node_js: stable
+cache:
+    apt: true
+    directories:
+        - node_modules 
+before_install:
+    - export TZ='Asia/Shanghai' # 更改时区
+    - npm install hexo-cli -g  # 安装hexo环境
 install:
   - npm install
+  - npm rebuild node-sass
 script:
+  - hexo clean 
   - hexo g
 after_script:
   - cd ./public
@@ -10,9 +19,9 @@ after_script:
   - git config user.name "hupoliuguang"
   - git config user.email "2687819306@qq.com"
   - git add .
-  - git commit -m "Update Blog By TravisCI With Build $TRAVIS_BUILD_NUMBER"
+  - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
   - git push --force --quiet "https://${travisGH}@${GH_REF}" master:master
-  - git push --force --quiet "https://hupoliuguang:${travisCD1}@${CO_REF}" master:master
+  - git push --force --quiet "https://hupoliuguang:${travisCD}@${CO_REF}" master:master
 branches:
   only:
     - source
