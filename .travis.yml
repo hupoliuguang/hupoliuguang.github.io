@@ -10,7 +10,7 @@ after_script:
   - git config user.name "hupoliuguang"
   - git config user.email "2687819306@qq.com"
   - git add .
-  - git commit -m "Update docs"
+  - git commit -m "Update Blog By TravisCI With Build $TRAVIS_BUILD_NUMBER"
   - git push --force --quiet "https://${travisGH}@${GH_REF}" master:master
   - git push --force --quiet "https://hupoliuguang:${travisCD}@${CO_REF}" master:master
 branches:
