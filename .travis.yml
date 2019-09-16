@@ -12,7 +12,7 @@ after_script:
   - git add .
   - git commit -m "Update Blog By TravisCI With Build $TRAVIS_BUILD_NUMBER"
   - git push --force --quiet "https://${travisGH}@${GH_REF}" master:master
-  - git push --force --quiet "https://hupoliuguang:${travisCD}@${CO_REF}" master:master
+  - git push --force --quiet "https://hupoliuguang:${travisCD1}@${CO_REF}" master:master
 branches:
   only:
     - source
