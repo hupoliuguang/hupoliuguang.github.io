@@ -12,9 +12,11 @@ after_script:
   - git add .
   - git commit -m "Update docs"
   - git push --force --quiet "https://${travisGH}@${GH_REF}" master:master
+  - git push --force --quiet "https://hupoliuguang:${travisCD}@${CO_REF}" master:master
 branches:
   only:
     - source
 env:
   global:
     - GH_REF: github.com/hupoliuguang/hupoliuguang.github.io.git
+    - CO_REF: git.coding.net/hupoliuguang/hupoliuguang.coding.me.git
