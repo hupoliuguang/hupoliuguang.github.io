@@ -30,7 +30,7 @@ after_script:
   # Github Pages
   - git push --force --quiet "https://${travisGH}@${GH_REF}" master:master --tags
   # Coding Pages
-  - git push --force --quiet "https://hupoliuguang:${travisCD}@${CO_REF}" master:master --tags
+  - git push --force --quiet "https://hupoliuguang:${travisCD1}@${CO_REF}" master:master --tags
 addons:
   apt:
     update: true
