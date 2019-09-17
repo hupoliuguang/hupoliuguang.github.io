@@ -23,15 +23,16 @@ after_script:
   - git init
   - git config --global user.name "hupoliuguang"
   - git config --global user.email "2687819306@qq.com"
-  #- git add .
-  #- git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
-  #- git tag v0.0.$TRAVIS_BUILD_NUMBER -a -m "Auto Taged By TravisCI With Build $TRAVIS_BUILD_NUMBER"
+  - git add .
+  - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
+  - git tag v0.0.$TRAVIS_BUILD_NUMBER -a -m "Auto Taged By TravisCI With Build $TRAVIS_BUILD_NUMBER"
   # Github Pages
-  #- git push --force --quiet "https://${travisGH}@${GH_REF}" master:master --tags
+  - git push --force --quiet "https://${travisGH}@${GH_REF}" master:master --tags
   # Coding Pages
   #- git push --force --quiet "https://hupoliuguang:${travisCD}@${CO_REF}" master:master --tags
+  - git push --force --quiet "https://hupoliuguang:luxing522724@${CO_REF}" master:master --tags
   #- sed -i "s/gh_token/${GH_TOKEN}/g" ./_config.yml
-  - hexo deploy
+  #- hexo deploy
   
 
   
