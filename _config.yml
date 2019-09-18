@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-keywords:
-author: John Doe
-language: en
+title: 琥珀流光
+subtitle: 奔跑吧 骄傲的少年
+description: 以梦为马，明日天涯。。。
+keywords:  
+author: 琥珀流光
+language: zh-CN
 timezone:
 
 # URL
@@ -72,6 +72,7 @@ pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+plugins: hexo-generate-feed
 ## Themes: https://hexo.io/themes/
 theme: next
 
