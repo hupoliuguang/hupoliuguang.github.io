@@ -156,15 +156,23 @@ baidu_push: false
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash from link value (/archives -> archives).
 # External url should start with http:// or https://
 menu:
-  home: / || 首页
-  about: /about/ || 关于
-  tags: /tags/ || 标签
-  categories: /categories/ || 分类
-  archives: /archives/ || 归档
-  schedule: /schedule/ || 日程表
-  sitemap: /sitemap.xml || 站点地图
-  commonweal: /404/ || 公益
-  
+  home: / || home
+  about: /about/ || user
+  tags: /tags/ || tags
+  categories: /categories/ || th
+  archives: /archives/ || archive
+  schedule: /schedule/ || calendar
+  sitemap: /sitemap.xml || sitemap
+  commonweal: /404/ || heartbeat
+  #home: 首页
+  #archives: 归档
+  #categories: 分类
+  #tags: 标签
+  #about: 关于
+  #search: 搜索
+  #schedule: 日程表
+  #sitemap: 站点地图
+  #commonweal: 公益404
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
