@@ -1,0 +1,12 @@
+# 依赖文件 (绝对不能传)
+node_modules/
+
+# Mac系统自动生成的垃圾文件
+.DS_Store
+
+# VitePress 编译生成的临时文件和最终网页
+.vitepress/dist
+.vitepress/cache
+
+# 环境变量
+.env
