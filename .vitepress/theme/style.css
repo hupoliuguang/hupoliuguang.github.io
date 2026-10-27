@@ -41,13 +41,10 @@ body {
   background-color: var(--vp-c-bg);
 }
 
-/* 导航右侧三件套：菜单 → 音乐 → 分隔 → 昼夜 → GitHub（flex order 排序）
-   VitePress 无「菜单后/昼夜前」插槽，用 order 重排 DOM；竖线由音乐右侧补 */
+/* 导航右侧三件套：菜单 → 音乐 → 昼夜 → GitHub（flex order 排序，纯间隔） */
 .VPNavBar .content-body .hl-music-wrap {
   order: 1;
-  margin-right: 8px;
-  padding-right: 8px;
-  border-right: 1px solid var(--vp-c-divider);
+  margin-right: 16px;
 }
 .VPNavBar .content-body .appearance {
   order: 2;
