@@ -190,6 +190,9 @@ html.dark .hl-recent-item {
 .hl-proj--tilt-r {
   transform: rotate(0.6deg) translateY(14px);
 }
+.hl-about {
+  margin-bottom: 26px;
+}
 .hl-about-title {
   margin-bottom: 16px;
   font-size: 14px;
