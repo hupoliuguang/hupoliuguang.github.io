@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import MurmurTimeline from '../components/MurmurTimeline.vue'
-import FooterBar from '../components/FooterBar.vue'
 </script>
 
 <template>
@@ -10,7 +9,6 @@ import FooterBar from '../components/FooterBar.vue'
       <p class="hl-page-desc">一些小而短的吐槽。</p>
     </header>
     <MurmurTimeline />
-    <FooterBar />
   </div>
 </template>
 

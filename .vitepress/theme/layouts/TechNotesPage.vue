@@ -2,7 +2,6 @@
 import { computed, ref } from 'vue'
 import TagPill from '../components/TagPill.vue'
 import PostPreviewCard from '../components/PostPreviewCard.vue'
-import FooterBar from '../components/FooterBar.vue'
 
 type Post = {
   url: string
@@ -102,8 +101,6 @@ const active = ref(sorted[0])
         <PostPreviewCard :post="active" />
       </div>
     </div>
-
-    <FooterBar />
   </div>
 </template>
 

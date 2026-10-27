@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import DevLogTimeline from '../components/DevLogTimeline.vue'
-import FooterBar from '../components/FooterBar.vue'
 </script>
 
 <template>
@@ -10,7 +9,6 @@ import FooterBar from '../components/FooterBar.vue'
       <p class="hl-page-desc">做了什么开发、在做什么，都一笔带过。</p>
     </header>
     <DevLogTimeline />
-    <FooterBar />
   </div>
 </template>
 

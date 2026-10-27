@@ -2,7 +2,6 @@
 import { devlog } from '../data/devlog'
 import { projects } from '../data/projects'
 import ProjectCard from '../components/ProjectCard.vue'
-import FooterBar from '../components/FooterBar.vue'
 
 const recent = devlog.slice(0, 3)
 </script>
@@ -44,8 +43,6 @@ const recent = devlog.slice(0, 3)
         />
       </div>
     </section>
-
-    <FooterBar />
   </div>
 </template>
 
