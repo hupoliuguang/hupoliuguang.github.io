@@ -41,6 +41,12 @@ body {
   background-color: var(--vp-c-bg);
 }
 
+/* 导航右上角：GitHub 头像 + 轻音乐 */
+.hl-nav-right {
+  display: flex;
+  align-items: center;
+}
+
 /* ============================================================
    夜间模式基础打底：暖黑底 + 马卡龙提亮
    精修（暗色阴影/卡片层次）留到统一调皮肤阶段

@@ -1,10 +1,27 @@
 import DefaultTheme from 'vitepress/theme'
+import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import './style.css'
+import GitHubAvatar from './components/GitHubAvatar.vue'
+import MusicToggle from './components/MusicToggle.vue'
+import TagPill from './components/TagPill.vue'
+import TimelineItem from './components/TimelineItem.vue'
 
-export default {
+const Theme: Theme = {
   extends: DefaultTheme,
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      'nav-bar-content-after': () =>
+        h('div', { class: 'hl-nav-right' }, [
+          h(GitHubAvatar),
+          h(MusicToggle)
+        ])
+    })
+  },
   enhanceApp({ app }) {
-    // M2：注册全局组件 GitHubAvatar / MusicToggle / TagPill 等
+    app.component('TagPill', TagPill)
+    app.component('TimelineItem', TimelineItem)
   }
-} satisfies Theme
+}
+
+export default Theme
