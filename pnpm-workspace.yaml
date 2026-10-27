@@ -1,0 +1,7 @@
+# pnpm 11 的构建脚本白名单。
+# 注意：pnpm 11.6.0 实际读取的字段是 allowBuilds（map），
+# 而不是旧文档里常写的 onlyBuiltDependencies。
+# esbuild 的 postinstall 必须运行，否则 VitePress 构建时原生二进制不可用，
+# 且 pnpm install 会因"被忽略的构建脚本"而 exit 1，导致 CI 失败。
+allowBuilds:
+  esbuild: true
