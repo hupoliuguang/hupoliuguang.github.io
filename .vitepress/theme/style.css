@@ -40,3 +40,32 @@
 body {
   background-color: var(--vp-c-bg);
 }
+
+/* ============================================================
+   夜间模式基础打底：暖黑底 + 马卡龙提亮
+   精修（暗色阴影/卡片层次）留到统一调皮肤阶段
+   ============================================================ */
+html.dark {
+  --vp-c-bg: #1E1A14;
+  --vp-c-bg-alt: #292318;
+  --vp-c-bg-soft: #332B20;
+  --vp-c-text-1: #F2E9DA;
+  --vp-c-text-2: #C9BBA5;
+  --vp-c-text-3: #9A8A72;
+  --vp-c-divider: #3A3125;
+  --vp-c-border: #3A3125;
+  --vp-c-brand-1: #FF9E73;
+  --vp-c-brand-2: #FFB08C;
+  --vp-c-brand-3: #FF8A5C;
+  --vp-c-brand-soft: rgba(255, 158, 115, 0.16);
+
+  --hl-coral: #FF9E73;
+  --hl-mint: #7CD9CB;
+  --hl-yellow: #FFD97A;
+  --hl-ink: #F2E9DA;
+  --hl-text: #C9BBA5;
+  --hl-weak: #9A8A72;
+  --hl-line: #3A3125;
+  --hl-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), 0 5px 12px rgba(0, 0, 0, 0.22);
+  --hl-shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.28), 0 3px 8px rgba(0, 0, 0, 0.18);
+}
