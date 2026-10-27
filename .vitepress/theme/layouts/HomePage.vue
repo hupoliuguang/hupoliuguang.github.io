@@ -43,6 +43,17 @@ const recent = devlog.slice(0, 3)
         />
       </div>
     </section>
+
+    <section class="hl-section hl-about">
+      <div class="hl-about-title">关于我</div>
+      <div class="hl-about-card">
+        <div class="hl-about-avatar">琉</div>
+        <div class="hl-about-body">
+          <p class="hl-about-text">住在山间小城，白天写代码，晚上画画。这个站点记录我做过的东西、踩过的坑，和偶尔冒出来的想法——希望它像一个安静的房间，你进来坐一会儿。</p>
+          <p class="hl-about-sign">写于 2026 秋</p>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -178,5 +189,60 @@ html.dark .hl-recent-item {
 }
 .hl-proj--tilt-r {
   transform: rotate(0.6deg) translateY(14px);
+}
+.hl-about-title {
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--hl-coral);
+}
+.hl-about-card {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  max-width: 980px;
+  padding: 28px 32px;
+  border-radius: var(--hl-radius);
+  background: #fff;
+  box-shadow: var(--hl-shadow-sm);
+  transform: rotate(0.3deg);
+}
+html.dark .hl-about-card {
+  background: var(--vp-c-bg-soft);
+}
+.hl-about-avatar {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--hl-coral), var(--hl-yellow));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(255, 138, 92, 0.35);
+}
+.hl-about-body {
+  flex: 1;
+}
+.hl-about-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 2.1;
+  color: var(--hl-text);
+}
+.hl-about-sign {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--hl-coral);
+}
+@media (max-width: 640px) {
+  .hl-about-card {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 </style>
