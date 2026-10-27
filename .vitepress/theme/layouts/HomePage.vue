@@ -4,6 +4,7 @@ import { projects } from '../data/projects'
 import ProjectCard from '../components/ProjectCard.vue'
 
 const recent = devlog.slice(0, 3)
+const featured = projects.slice(0, 6)
 </script>
 
 <template>
@@ -35,13 +36,14 @@ const recent = devlog.slice(0, 3)
     <section class="hl-section">
       <div class="hl-module-head">
         <div class="hl-module-title">一些作品</div>
-        <a class="hl-module-link" href="https://github.com/hupoliuguang" target="_blank" rel="noopener">全部作品 →</a>
+        <a class="hl-module-link" href="/works.html" rel="noopener">全部作品 →</a>
       </div>
       <div class="hl-proj-grid">
         <ProjectCard
-          v-for="(p, i) in projects"
+          v-for="(p, i) in featured"
           :key="p.title"
           :project="p"
+          :index="i"
           :class="i % 2 ? 'hl-proj--tilt-r' : 'hl-proj--tilt-l'"
         />
       </div>

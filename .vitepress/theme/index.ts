@@ -10,6 +10,7 @@ import HomePage from './layouts/HomePage.vue'
 import DevLogPage from './layouts/DevLogPage.vue'
 import MurmurPage from './layouts/MurmurPage.vue'
 import TechNotesPage from './layouts/TechNotesPage.vue'
+import WorksPage from './layouts/WorksPage.vue'
 
 const Theme: Theme = {
   extends: DefaultTheme,
@@ -28,6 +29,7 @@ const Theme: Theme = {
     app.component('DevLogPage', DevLogPage)
     app.component('MurmurPage', MurmurPage)
     app.component('TechNotesPage', TechNotesPage)
+    app.component('WorksPage', WorksPage)
   }
 }
 
