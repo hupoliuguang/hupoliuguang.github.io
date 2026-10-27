@@ -22,7 +22,7 @@ const recent = devlog.slice(0, 3)
     </section>
 
     <section class="hl-section">
-      <h2 class="hl-section-title">最近</h2>
+      <div class="hl-module-title">最近</div>
       <ul class="hl-recent">
         <li v-for="r in recent" :key="r.date" class="hl-recent-item">
           <span class="hl-recent-date">{{ r.date }}</span>
@@ -33,7 +33,10 @@ const recent = devlog.slice(0, 3)
     </section>
 
     <section class="hl-section">
-      <h2 class="hl-section-title">作品</h2>
+      <div class="hl-module-head">
+        <div class="hl-module-title">一些作品</div>
+        <a class="hl-module-link" href="https://github.com/hupoliuguang" target="_blank" rel="noopener">全部作品 →</a>
+      </div>
       <div class="hl-proj-grid">
         <ProjectCard
           v-for="(p, i) in projects"
@@ -65,7 +68,7 @@ const recent = devlog.slice(0, 3)
 }
 .hl-hero {
   text-align: center;
-  padding: 64px 0 36px;
+  padding: 64px 0 58px;
 }
 .hl-hero-cards {
   position: relative;
@@ -124,16 +127,30 @@ html.dark .hl-hero-card--front {
   letter-spacing: 3px;
 }
 .hl-section {
-  margin-top: 48px;
+  margin: 0 0 58px;
 }
-.hl-section-title {
-  margin: 0 0 20px;
-  color: var(--hl-ink);
-  font-size: 26px;
+.hl-module-title {
+  margin: 0 0 16px;
+  font-size: 14px;
+  font-weight: 700;
   letter-spacing: 2px;
+  color: var(--hl-coral);
 }
-.hl-section-title::before {
-  content: '✦ ';
+.hl-module-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.hl-module-head .hl-module-title {
+  margin: 0;
+}
+.hl-module-link {
+  font-size: 13px;
+  color: var(--hl-weak);
+  text-decoration: none;
+}
+.hl-module-link:hover {
   color: var(--hl-coral);
 }
 .hl-recent {
@@ -191,7 +208,7 @@ html.dark .hl-recent-item {
   transform: rotate(0.6deg) translateY(14px);
 }
 .hl-about {
-  margin-bottom: 26px;
+  margin-bottom: 58px;
 }
 .hl-about-title {
   margin-bottom: 16px;
