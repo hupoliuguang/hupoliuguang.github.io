@@ -13,3 +13,4 @@ node_modules/
 
 # 本地 AI 工具记忆目录
 .workbuddy/
+.creative-design/

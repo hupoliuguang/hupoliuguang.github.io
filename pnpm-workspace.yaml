@@ -1,3 +1,6 @@
+# pnpm 11 工作区声明：单包仓库，无子包，必须显式给出 packages。
+packages: []
+
 # pnpm 11 的构建脚本白名单。
 # 注意：pnpm 11.6.0 实际读取的字段是 allowBuilds（map），
 # 而不是旧文档里常写的 onlyBuiltDependencies。

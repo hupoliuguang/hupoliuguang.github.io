@@ -1,0 +1,42 @@
+/* ============================================================
+   设计系统：奶油底 × 马卡龙（皮肤唯一落点）
+   换肤 = 只改本文件的变量 + 字体栈，目录/组件/页面结构零改动
+   ============================================================ */
+
+:root {
+  /* 底色与文字 */
+  --vp-c-bg: #FFF9F0;
+  --vp-c-bg-alt: #FBF3E6;
+  --vp-c-bg-soft: #F6EDDC;
+  --vp-c-text-1: #3E2F23;
+  --vp-c-text-2: #57483A;
+  --vp-c-text-3: #A08A6E;
+  --vp-c-divider: #F0E3C8;
+  --vp-c-border: #F0E3C8;
+  --vp-c-brand-1: #FF8A5C;
+  --vp-c-brand-2: #F2753F;
+  --vp-c-brand-3: #E6602E;
+  --vp-c-brand-soft: rgba(255, 138, 92, 0.14);
+
+  /* 字体：幼圆优先（Windows），Mac/手机回退雅黑/PingFang */
+  --vp-font-family-base: '幼圆', 'YouYuan', 'Microsoft YaHei', '微软雅黑', 'PingFang SC', 'Noto Sans SC', sans-serif;
+  --vp-font-family-heading: '幼圆', 'YouYuan', 'Microsoft YaHei', '微软雅黑', 'PingFang SC', 'Noto Sans SC', sans-serif;
+
+  /* 马卡龙设计 token（自定义组件共用） */
+  --hl-coral: #FF8A5C;
+  --hl-mint: #62C3B5;
+  --hl-yellow: #F7C948;
+  --hl-ink: #3E2F23;
+  --hl-text: #57483A;
+  --hl-weak: #A08A6E;
+  --hl-line: #F0E3C8;
+  --hl-radius: 20px;
+  --hl-radius-sm: 14px;
+  --hl-shadow: 0 20px 40px rgba(180, 150, 110, 0.2), 0 5px 12px rgba(180, 150, 110, 0.1);
+  --hl-shadow-sm: 0 8px 18px rgba(180, 150, 110, 0.16), 0 3px 8px rgba(180, 150, 110, 0.08);
+}
+
+/* 默认主题微调：奶油底贯通 */
+body {
+  background-color: var(--vp-c-bg);
+}

@@ -5,14 +5,14 @@ layout: home
 hero:
   name: "琥珀流光"
   text: "的数字花园"
-  tagline: 独立游戏开发 / 《闯荡江湖》开发日志 / 技术沉淀
+  tagline: 独立游戏开发 / 《古代卡牌生存》开发日志 / 技术沉淀
   actions:
     - theme: brand
-      text: 查阅文档
-      link: /markdown-examples
+      text: 开发日志
+      link: /dev-log
     - theme: alt
-      text: 访问 GitHub
-      link: https://github.com/hupoliuguang
+      text: 技术思考
+      link: /tech-notes
 
 features:
   - title: 纯净沉浸
