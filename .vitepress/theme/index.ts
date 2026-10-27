@@ -15,11 +15,10 @@ const Theme: Theme = {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'nav-bar-content-after': () =>
-        h('div', { class: 'hl-nav-right' }, [
-          h(GitHubAvatar),
-          h(MusicToggle)
-        ])
+      'nav-bar-content-after': () => [
+        h(MusicToggle),
+        h(GitHubAvatar)
+      ]
     })
   },
   enhanceApp({ app }) {
