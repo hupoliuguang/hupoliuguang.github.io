@@ -5,3 +5,7 @@
 # 且 pnpm install 会因"被忽略的构建脚本"而 exit 1，导致 CI 失败。
 allowBuilds:
   esbuild: true
+
+# pnpm 11 默认 strictDepBuilds=true，任何未登记构建脚本的依赖都会让 install 直接失败。
+# 这里关掉严格模式，仅保留警告，行为与之前 pnpm 9 的部署一致。
+strictDepBuilds: false
