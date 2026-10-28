@@ -12,7 +12,7 @@ const tracks = ref<Track[]>([...FALLBACK_TRACKS])
 
 const trackIndex = ref(0)
 const muted = ref(true)
-const volume = ref(1)
+const volume = ref(0.3) // 默认音量 30%（localStorage 有记忆时优先记忆值）
 const audioEl = ref<HTMLAudioElement | null>(null)
 
 onMounted(async () => {
