@@ -11,9 +11,10 @@ const rawModules = import.meta.glob('../../../devlog/*.md', {
 export const devlog: DevlogItem[] = Object.entries(rawModules)
   .map(([key, raw]) => {
     const { fm, body } = parseMd(raw)
+    const tags = Array.isArray(fm.tags) ? (fm.tags as string[]) : fm.tag ? [fm.tag as string] : []
     return {
       date: (fm.date as string) ?? (key.match(/(\d{4}-\d{2}-\d{2})/) ?? [''])[1],
-      tag: (fm.tag as string) ?? undefined,
+      tag: tags[0] ?? undefined,
       text: firstPara(body) || body.trim()
     }
   })
