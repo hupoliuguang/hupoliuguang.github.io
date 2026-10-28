@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TimelineItem from './TimelineItem.vue'
-import { murmurs } from '../data/murmurs'
+import { murmurs } from '../lib/murmurs'
 
 const tones = ['coral', 'mint', 'yellow'] as const
 </script>

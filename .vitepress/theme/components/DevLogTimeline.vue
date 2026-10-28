@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import TimelineItem from './TimelineItem.vue'
-import { devlog } from '../data/devlog'
+import { devlog, type DevlogItem } from '../lib/devlog'
 
 const groups = computed(() => {
-  const map: { year: string; items: typeof devlog }[] = []
+  const map: { year: string; items: DevlogItem[] }[] = []
   for (const item of devlog) {
     const year = item.date.slice(0, 4)
     const last = map[map.length - 1]

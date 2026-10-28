@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { devlog } from '../data/devlog'
+import { devlog } from '../lib/devlog'
 import { projects } from '../data/projects'
 import ProjectCard from '../components/ProjectCard.vue'
 
