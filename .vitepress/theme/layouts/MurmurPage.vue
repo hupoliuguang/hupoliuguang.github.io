@@ -16,7 +16,7 @@ import MurmurTimeline from '../components/MurmurTimeline.vue'
 .hl-page {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 48px 24px 0;
+  padding: 48px 24px 96px;
 }
 .hl-page-head {
   text-align: center;
