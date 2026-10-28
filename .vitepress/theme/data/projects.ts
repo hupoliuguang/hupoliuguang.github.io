@@ -11,7 +11,7 @@ export const projects: ProjectItem[] = [
     title: '古代卡牌生存',
     desc: '水墨国风卡牌 RPG，独立开发中',
     date: '2025-11',
-    image: '/img/card-survival.jpg',
+    image: '/img/card-survival.webp',
     link: '/tech-notes/ink-visual-language.html'
   },
   {

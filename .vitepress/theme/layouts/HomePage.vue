@@ -14,7 +14,7 @@ const featured = projects.slice(0, 6)
         <div class="hl-hero-card hl-hero-card--back1" />
         <div class="hl-hero-card hl-hero-card--back2" />
         <div class="hl-hero-card hl-hero-card--front">
-          <img src="/img/hero-bg.jpg" alt="水墨龙城：孤舟远山" />
+          <img src="/img/hero-bg.webp" alt="水墨龙城：孤舟远山" />
         </div>
       </div>
       <h1 class="hl-hero-title">琥珀流光</h1>
