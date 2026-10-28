@@ -90,3 +90,27 @@ html.dark {
   --hl-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), 0 5px 12px rgba(0, 0, 0, 0.22);
   --hl-shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.28), 0 3px 8px rgba(0, 0, 0, 0.18);
 }
+
+/* ============================================================
+   页脚横幅式：宽屏左右分栏（copyright 左 / message 右），窄屏回退上下居中
+   ============================================================ */
+.VPFooter .container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.VPFooter .message,
+.VPFooter .copyright {
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .VPFooter .container {
+    display: block;
+    text-align: center;
+  }
+  .VPFooter .message {
+    margin-bottom: 4px;
+  }
+}
