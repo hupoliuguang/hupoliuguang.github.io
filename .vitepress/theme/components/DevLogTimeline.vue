@@ -14,7 +14,7 @@ const groups = computed(() => {
   return map
 })
 
-const tones = ['coral', 'yellow', 'mint']
+const tones = ['coral', 'yellow', 'mint'] as const
 </script>
 
 <template>

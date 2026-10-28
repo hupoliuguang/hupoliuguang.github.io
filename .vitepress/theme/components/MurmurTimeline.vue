@@ -2,7 +2,7 @@
 import TimelineItem from './TimelineItem.vue'
 import { murmurs } from '../data/murmurs'
 
-const tones = ['coral', 'mint', 'yellow']
+const tones = ['coral', 'mint', 'yellow'] as const
 </script>
 
 <template>

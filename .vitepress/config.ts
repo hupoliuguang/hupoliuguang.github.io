@@ -8,8 +8,8 @@ export default defineConfig({
   // examples/ 里的示例 md 仅作写作参考（AI 模板），不渲染为站点页面
   srcExclude: ['examples/**'],
   lastUpdated: true,
-  search: { provider: 'local' },
   themeConfig: {
+    search: { provider: 'local' },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
