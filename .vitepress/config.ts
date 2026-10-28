@@ -1,4 +1,43 @@
 import { defineConfig } from 'vitepress'
+import { existsSync, readdirSync, writeFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import type { Plugin } from 'vite'
+
+// 背景音乐自动扫描：public/audio/ 拖入音频即加入播放列表，无需改代码
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const AUDIO_DIR = join(__dirname, '../public/audio')
+const MANIFEST_PATH = join(__dirname, '../public/audio-manifest.json')
+const AUDIO_EXT = /\.(mp3|m4a|ogg|wav|flac)$/i
+
+function scanAudio() {
+  if (!existsSync(AUDIO_DIR)) return
+  const manifest = readdirSync(AUDIO_DIR)
+    .filter((f) => AUDIO_EXT.test(f))
+    .sort((a, b) => a.localeCompare(b, 'zh-CN'))
+    .map((f) => {
+      // 曲名 = 文件名去扩展名，连字符/下划线转空格，首字母大写
+      const name = f.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ')
+      return {
+        title: name.charAt(0).toUpperCase() + name.slice(1),
+        file: `/audio/${f}`
+      }
+    })
+  writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2), 'utf-8')
+}
+
+// dev 与 build 启动时立即生成清单；并 watch 音频目录，增删文件后自动重建
+function scanAudioPlugin(): Plugin {
+  return {
+    name: 'hl-scan-audio-manifest',
+    buildStart() {
+      scanAudio()
+      this.addWatchFile(AUDIO_DIR)
+    }
+  }
+}
+
+scanAudio()
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -9,6 +48,9 @@ export default defineConfig({
   // 条目只在对应页面按时间线展示，不生成独立详情页
   srcExclude: ['examples/**', 'devlog/**', 'murmurs/**'],
   lastUpdated: true,
+  vite: {
+    plugins: [scanAudioPlugin()]
+  },
   themeConfig: {
     search: { provider: 'local' },
     // https://vitepress.dev/reference/default-theme-config
