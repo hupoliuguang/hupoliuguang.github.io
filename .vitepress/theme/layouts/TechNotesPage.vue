@@ -1,75 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import TagPill from '../components/TagPill.vue'
 import PostPreviewCard from '../components/PostPreviewCard.vue'
+import { data as posts } from '../../data/tech-notes.data'
+import type { TechNoteItem } from '../../data/content'
 
-type Post = {
-  url: string
-  title: string
-  date: string
-  tags: string[]
-  excerpt: string
-  headings: { text: string; anchor: string }[]
-}
-
-const rawModules = import.meta.glob('../../../tech-notes/*.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default'
-}) as Record<string, string>
-
-function parseFrontmatter(raw: string) {
-  const fm: Record<string, string | string[]> = {}
-  const m = /^---\r?\n([\s\S]*?)\r?\n---/.exec(raw)
-  if (m) {
-    for (const line of m[1].split(/\r?\n/)) {
-      const kv = /^(\w+):\s*(.*)$/.exec(line.trim())
-      if (!kv) continue
-      const key = kv[1]
-      let value = kv[2].trim()
-      if (value.startsWith('[') && value.endsWith(']')) {
-        fm[key] = value
-          .slice(1, -1)
-          .split(',')
-          .map((s) => s.trim().replace(/^['"]|['"]$/g, ''))
-      } else {
-        fm[key] = value.replace(/^['"]|['"]$/g, '')
-      }
-    }
-  }
-  const body = raw.replace(/^---[\s\S]*?\n---\r?\n?/, '')
-  return { fm, body }
-}
-
-function extractHeadings(body: string) {
-  const out: { text: string; anchor: string }[] = []
-  const re = /^##\s+(.+)$/gm
-  let m: RegExpExecArray | null
-  while ((m = re.exec(body)) && out.length < 6) {
-    const text = m[1].replace(/[*`]/g, '').trim()
-    out.push({ text, anchor: text.replace(/\s+/g, '-').toLowerCase() })
-  }
-  return out
-}
-
-const posts: Post[] = Object.entries(rawModules).map(([key, raw]) => {
-  const { fm, body } = parseFrontmatter(raw)
-  const url = '/' + key.replace(/^\.\.\/\.\.\/\.\.\//, '').replace(/\.md$/, '.html')
-  const firstPara = body
-    .split(/\r?\n\r?\n|\n\n/)
-    .find((p) => p.trim() && !p.startsWith('#') && !p.startsWith('>') && !p.startsWith('```'))
-  return {
-    url,
-    title: (fm.title as string) ?? '',
-    date: (fm.date as string) ?? '',
-    tags: (fm.tags as string[]) ?? [],
-    excerpt: firstPara ? firstPara.replace(/[*`>#]/g, '').trim().slice(0, 120) : '',
-    headings: extractHeadings(body)
-  }
-})
-
-const sorted = posts.sort((a, b) => +new Date(b.date) - +new Date(a.date))
-const active = ref(sorted[0])
+const active = ref<TechNoteItem>(posts[0])
 </script>
 
 <template>
@@ -82,7 +18,7 @@ const active = ref(sorted[0])
     <div class="hl-tech-layout">
       <aside class="hl-tech-list">
         <button
-          v-for="(p, i) in sorted"
+          v-for="(p, i) in posts"
           :key="p.url"
           class="hl-tech-card"
           :class="{ 'hl-tech-card--active': p === active }"

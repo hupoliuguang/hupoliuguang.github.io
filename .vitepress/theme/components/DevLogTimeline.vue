@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import TimelineItem from './TimelineItem.vue'
-import { devlog, type DevlogItem } from '../lib/devlog'
+import { data as devlog } from '../../data/devlog.data'
+import type { DevlogItem } from '../../data/content'
 
 const groups = computed(() => {
   const map: { year: string; items: DevlogItem[] }[] = []
