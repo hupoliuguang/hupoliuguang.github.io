@@ -9,6 +9,9 @@ node_modules/
 .vitepress/cache
 .vitepress/.temp
 
+# 音频清单为构建时自动扫描生成
+public/audio-manifest.json
+
 # 环境变量
 .env
 
