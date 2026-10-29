@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 const props = withDefaults(
-  defineProps<{ date: string; text: string; tag?: string; tone?: 'coral' | 'mint' | 'yellow' }>(),
+  defineProps<{ date: string; text: string; tag?: string; url?: string; tone?: 'coral' | 'mint' | 'yellow' }>(),
   { tone: 'coral' }
 )
 const toneClass = computed(() => `hl-tl--${props.tone}`)
@@ -15,6 +15,10 @@ let ro: ResizeObserver | null = null
 function checkOverflow() {
   const el = textEl.value
   if (!el) return
+  if (props.url) {
+    isLong.value = false
+    return
+  }
   // 测量期间断开 RO，避免「改样式 → RO 触发 → 再改」死循环
   ro?.disconnect()
   // 临时解除 line-clamp，用 Range 数文本真实行数；超过 3 行视为超长
@@ -26,7 +30,7 @@ function checkOverflow() {
   void el.offsetHeight
   const first = el.firstChild
   let lines = 0
-  if (first && first.nodeType === Node.TEXT_NODE) {
+  if (first instanceof Text) {
     const range = document.createRange()
     range.setStart(first, 0)
     range.setEnd(first, first.length)
@@ -59,8 +63,11 @@ onBeforeUnmount(() => {
         <span class="hl-tl-date">{{ date }}</span>
         <span v-if="tag" class="hl-tl-tag">{{ tag }}</span>
       </div>
-      <p ref="textEl" class="hl-tl-text" :class="{ 'hl-tl-text--open': expanded }">{{ text }}</p>
-      <button v-if="isLong" type="button" class="hl-tl-more" @click="expanded = !expanded">
+      <p ref="textEl" class="hl-tl-text" :class="{ 'hl-tl-text--open': expanded }">
+        <a v-if="url" :href="url" class="hl-tl-link">{{ text }}</a>
+        <template v-else>{{ text }}</template>
+      </p>
+      <button v-if="isLong && !url" type="button" class="hl-tl-more" @click="expanded = !expanded">
         {{ expanded ? '收起 ▴' : '展开 ▾' }}
       </button>
     </div>
@@ -140,6 +147,7 @@ html.dark .hl-tl-card {
   line-height: 1.7;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   max-height: 78px;
@@ -147,7 +155,16 @@ html.dark .hl-tl-card {
 }
 .hl-tl-text--open {
   -webkit-line-clamp: unset;
+  line-clamp: unset;
   max-height: 800px;
+}
+.hl-tl-link {
+  color: inherit;
+  text-decoration: none;
+}
+.hl-tl-link:hover {
+  color: var(--hl-coral);
+  text-decoration: underline;
 }
 .hl-tl-more {
   display: inline-block;

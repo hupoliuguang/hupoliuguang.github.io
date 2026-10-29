@@ -27,7 +27,8 @@ const featured = projects.slice(0, 6)
       <ul class="hl-recent">
         <li v-for="r in recent" :key="r.date" class="hl-recent-item">
           <span class="hl-recent-date">{{ r.date }}</span>
-          <span class="hl-recent-text">{{ r.text }}</span>
+          <a v-if="r.url" :href="r.url" class="hl-recent-text">{{ r.text }}</a>
+          <span v-else class="hl-recent-text">{{ r.text }}</span>
           <span v-if="r.tag" class="hl-recent-tag">{{ r.tag }}</span>
         </li>
       </ul>
@@ -190,6 +191,12 @@ html.dark .hl-recent-item {
   min-width: 200px;
   color: var(--hl-text);
   font-size: 15px;
+}
+a.hl-recent-text {
+  text-decoration: none;
+}
+a.hl-recent-text:hover {
+  color: var(--hl-coral);
 }
 .hl-recent-tag {
   padding: 2px 10px;

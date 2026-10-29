@@ -28,6 +28,7 @@ const tones = ['coral', 'yellow', 'mint'] as const
           :date="item.date"
           :text="item.text"
           :tag="item.tag"
+          :url="item.url"
           :tone="tones[(gi + i) % tones.length]"
         />
       </ul>

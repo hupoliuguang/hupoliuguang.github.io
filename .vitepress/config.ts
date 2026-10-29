@@ -44,9 +44,9 @@ export default defineConfig({
   title: "琥珀流光的数字花园",
   description: "独立游戏开发 / 开发日志 / 技术沉淀",
   lang: 'zh-CN',
-  // examples/ 里的示例 md 仅作写作参考（AI 模板）；devlog/ 与 murmurs/ 是时间线数据源，
-  // 条目只在对应页面按时间线展示，不生成独立详情页
-  srcExclude: ['examples/**', 'devlog/**', 'murmurs/**'],
+  // examples/ 里的示例 md 仅作写作参考（AI 模板）；murmurs/ 是时间线数据源，
+  // 条目只在碎碎念页按时间线展示，不生成独立详情页；dev-log/ 与 tech-notes/ 会生成独立详情页
+  srcExclude: ['examples/**', 'murmurs/**'],
   lastUpdated: true,
   vite: {
     plugins: [scanAudioPlugin()]
