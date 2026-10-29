@@ -1,0 +1,63 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "新建：开发日志",
+      "type": "process",
+      "command": "node",
+      "args": ["scripts/new.mjs", "log", "${input:title}", "--tags", "${input:tags}"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      "label": "新建：技术思考",
+      "type": "process",
+      "command": "node",
+      "args": ["scripts/new.mjs", "note", "${input:title}", "--tags", "${input:tags}"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      "label": "新建：碎碎念",
+      "type": "process",
+      "command": "node",
+      "args": ["scripts/new.mjs", "murmur", "${input:murmurTitle}"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      "label": "本地预览（VitePress dev）",
+      "type": "npm",
+      "script": "docs:dev",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "构建（VitePress build）",
+      "type": "npm",
+      "script": "docs:build",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared" }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "title",
+      "type": "promptString",
+      "description": "标题（会成为文件名，不要带 / \\ : * ? \" < > |）",
+      "default": ""
+    },
+    {
+      "id": "tags",
+      "type": "promptString",
+      "description": "标签，英文逗号分隔，可留空",
+      "default": ""
+    },
+    {
+      "id": "murmurTitle",
+      "type": "promptString",
+      "description": "碎碎念标题（可留空，直接回车）",
+      "default": ""
+    }
+  ]
+}
