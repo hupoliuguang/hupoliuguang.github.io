@@ -8,6 +8,7 @@ node_modules/
 .vitepress/dist
 .vitepress/cache
 .vitepress/.temp
+*.timestamp-*.mjs
 
 # 音频清单为构建时自动扫描生成
 public/audio-manifest.json

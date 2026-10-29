@@ -1,3 +1,4 @@
 ---
 layout: WorksPage
+search: false
 ---
