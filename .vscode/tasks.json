@@ -5,7 +5,7 @@
       "label": "新建：开发日志",
       "type": "process",
       "command": "node",
-      "args": ["scripts/new.mjs", "log", "${input:title}", "--tags", "${input:tags}"],
+      "args": ["scripts/new.mjs", "log", "${input:title}", "--tags", "${input:tags}", "--date", "${input:date}"],
       "problemMatcher": [],
       "presentation": { "reveal": "always", "panel": "shared", "clear": true }
     },
@@ -13,7 +13,7 @@
       "label": "新建：技术思考",
       "type": "process",
       "command": "node",
-      "args": ["scripts/new.mjs", "note", "${input:title}", "--tags", "${input:tags}"],
+      "args": ["scripts/new.mjs", "note", "${input:title}", "--tags", "${input:tags}", "--date", "${input:date}"],
       "problemMatcher": [],
       "presentation": { "reveal": "always", "panel": "shared", "clear": true }
     },
@@ -21,7 +21,7 @@
       "label": "新建：碎碎念",
       "type": "process",
       "command": "node",
-      "args": ["scripts/new.mjs", "murmur", "${input:murmurTitle}"],
+      "args": ["scripts/new.mjs", "murmur", "${input:murmurTitle}", "--date", "${input:date}"],
       "problemMatcher": [],
       "presentation": { "reveal": "always", "panel": "shared", "clear": true }
     },
@@ -57,6 +57,12 @@
       "id": "murmurTitle",
       "type": "promptString",
       "description": "碎碎念标题（可留空，直接回车）",
+      "default": ""
+    },
+    {
+      "id": "date",
+      "type": "promptString",
+      "description": "日期 YYYY-MM-DD（留空 = 今天，补旧文时填写）",
       "default": ""
     }
   ]
