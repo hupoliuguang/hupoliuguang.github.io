@@ -36,6 +36,28 @@
 └─ package.json / pnpm-lock.yaml / tsconfig.json
 ```
 
+## 内容如何变成网页（先收集，后发布）
+
+这个站点是"先收集、后发布"的模式：md 是唯一内容源，构建期由数据层自动收集成结构化条目，发布由 `git push` 触发，全程无后端、无数据库。
+
+```mermaid
+flowchart LR
+    A["写 md<br/>dev-log/ · tech-notes/ · murmurs/"] --> B["构建期收集<br/>.vitepress/data/ 数据加载器<br/>frontmatter + 正文 → 结构化条目"]
+    B --> C["组件渲染<br/>时间线 / 卡片 / 首页「最近」"]
+    A --> D["详情页<br/>每篇 dev-log / tech-notes 独立页面"]
+    C --> E["静态构建 dist/<br/>页面 + 搜索索引 + 资源"]
+    D --> E
+    E --> F["git push main"]
+    F --> G["GitHub Actions<br/>构建并部署"]
+    G --> H["GitHub Pages<br/>线上站点"]
+```
+
+要点：
+
+- **新增文章零代码改动**：列表、首页「最近」、搜索索引都由构建期自动收集生成，不用手改导航；
+- **发布即提交**：推送 main 后由 Actions 自动构建部署，构建失败不影响线上已有版本；
+- **搜索是构建期生成的静态索引**，浏览器本地检索，无后端请求。
+
 ## 本地开发
 
 ```bash
