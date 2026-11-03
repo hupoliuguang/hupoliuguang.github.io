@@ -1,5 +1,5 @@
 export type DevlogItem = { date: string; tag?: string; text: string; url: string }
-export type MurmurItem = { date: string; text: string }
+export type MurmurItem = { date: string; text: string; file: string; long: boolean }
 export type TechNoteItem = {
   url: string
   title: string

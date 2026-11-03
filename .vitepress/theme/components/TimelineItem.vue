@@ -1,16 +1,52 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { withBase } from 'vitepress'
 
 const props = withDefaults(
-  defineProps<{ date: string; text: string; tag?: string; url?: string; tone?: 'coral' | 'mint' | 'yellow' }>(),
-  { tone: 'coral' }
+  defineProps<{
+    date: string
+    text: string
+    tag?: string
+    url?: string
+    tone?: 'coral' | 'mint' | 'yellow'
+    contentUrl?: string
+    long?: boolean
+  }>(),
+  { tone: 'coral', long: false }
 )
 const toneClass = computed(() => `hl-tl--${props.tone}`)
 
 const textEl = ref<HTMLParagraphElement | null>(null)
 const isLong = ref(false)
 const expanded = ref(false)
+const fullHtml = ref('')
+const loading = ref(false)
+const failed = ref(false)
+let fetched = false
 let ro: ResizeObserver | null = null
+
+// 碎碎念长文：展开时按需 fetch 构建期预渲染好的全文 JSON，列表页不一次加载全部全文
+async function loadFull() {
+  if (!props.contentUrl || fetched || fullHtml.value) return
+  fetched = true
+  loading.value = true
+  failed.value = false
+  try {
+    const res = await fetch(withBase(props.contentUrl))
+    if (!res.ok) throw new Error(String(res.status))
+    const data = await res.json()
+    fullHtml.value = data.html ?? ''
+  } catch {
+    failed.value = true
+  } finally {
+    loading.value = false
+  }
+}
+
+function toggle() {
+  expanded.value = !expanded.value
+  if (expanded.value && props.contentUrl) loadFull()
+}
 
 function checkOverflow() {
   const el = textEl.value
@@ -67,9 +103,14 @@ onBeforeUnmount(() => {
         <a v-if="url" :href="url" class="hl-tl-link">{{ text }}</a>
         <template v-else>{{ text }}</template>
       </p>
-      <button v-if="isLong && !url" type="button" class="hl-tl-more" @click="expanded = !expanded">
+      <button v-if="(isLong || long) && !url" type="button" class="hl-tl-more" @click="toggle">
         {{ expanded ? '收起 ▴' : '展开 ▾' }}
       </button>
+      <div v-if="expanded && contentUrl" class="hl-tl-full">
+        <p v-if="loading" class="hl-tl-full-hint">正在展开全文…</p>
+        <p v-else-if="failed" class="hl-tl-full-hint">全文加载失败,请稍后重试</p>
+        <div v-else class="hl-tl-full-html" v-html="fullHtml" />
+      </div>
     </div>
   </li>
 </template>
@@ -179,5 +220,49 @@ html.dark .hl-tl-card {
 }
 .hl-tl-more:hover {
   color: var(--hl-coral);
+}
+.hl-tl-full {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--vp-c-divider);
+}
+.hl-tl-full-hint {
+  margin: 0;
+  color: var(--hl-weak);
+  font-size: 13px;
+}
+.hl-tl-full-html {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--hl-text);
+}
+.hl-tl-full-html p {
+  margin: 0 0 10px;
+}
+.hl-tl-full-html p:last-child {
+  margin-bottom: 0;
+}
+.hl-tl-full-html img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+.hl-tl-full-html blockquote {
+  margin: 0 0 10px;
+  padding: 6px 14px;
+  border-left: 3px solid var(--hl-coral);
+  background: var(--vp-c-bg-alt);
+  border-radius: 0 8px 8px 0;
+  color: var(--hl-weak);
+}
+.hl-tl-full-html ul,
+.hl-tl-full-html ol {
+  margin: 0 0 10px;
+  padding-left: 22px;
+}
+.hl-tl-full-html code {
+  background: var(--vp-c-bg-alt);
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: 13px;
 }
 </style>

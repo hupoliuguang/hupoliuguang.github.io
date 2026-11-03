@@ -14,6 +14,8 @@ const tones = ['coral', 'mint', 'yellow'] as const
         :date="m.date"
         :text="m.text"
         :tone="tones[i % tones.length]"
+        :content-url="m.file"
+        :long="m.long"
       />
     </ul>
   </div>

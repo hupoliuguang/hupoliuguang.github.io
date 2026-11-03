@@ -1,8 +1,9 @@
 import { defineConfig } from 'vitepress'
-import { existsSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { Plugin } from 'vite'
+import MarkdownIt from 'markdown-it'
 
 // 背景音乐自动扫描：public/audio/ 拖入音频即加入播放列表，无需改代码
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -37,6 +38,39 @@ function scanAudioPlugin(): Plugin {
   }
 }
 
+// 碎碎念全文预渲染：murmurs/*.md → public/murmurs/<文件名>.json（含 HTML）。
+// 时间线「展开」时前端按需 fetch 这一份 JSON，列表页不一次加载全部全文。
+// public/ 会被原样复制进 dist，dev 与 build 都能访问
+const MURMUR_DIR = join(__dirname, '../murmurs')
+const MURMUR_JSON_DIR = join(__dirname, '../public/murmurs')
+
+function buildMurmurJson() {
+  if (!existsSync(MURMUR_DIR)) return
+  mkdirSync(MURMUR_JSON_DIR, { recursive: true })
+  const md = new MarkdownIt({ html: false, linkify: true, breaks: true })
+  for (const f of readdirSync(MURMUR_DIR)) {
+    if (!f.endsWith('.md')) continue
+    const raw = readFileSync(join(MURMUR_DIR, f), 'utf-8')
+    const body = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '')
+    const slug = f.replace(/\.md$/, '')
+    writeFileSync(
+      join(MURMUR_JSON_DIR, `${slug}.json`),
+      JSON.stringify({ html: md.render(body) }),
+      'utf-8'
+    )
+  }
+}
+
+function murmurJsonPlugin(): Plugin {
+  return {
+    name: 'hl-build-murmur-json',
+    buildStart() {
+      buildMurmurJson()
+      this.addWatchFile(MURMUR_DIR)
+    }
+  }
+}
+
 scanAudio()
 
 // https://vitepress.dev/reference/site-config
@@ -49,7 +83,7 @@ export default defineConfig({
   srcExclude: ['examples/**', 'murmurs/**', 'templates/**', 'README.md'],
   lastUpdated: true,
   vite: {
-    plugins: [scanAudioPlugin()]
+    plugins: [scanAudioPlugin(), murmurJsonPlugin()]
   },
   themeConfig: {
     search: {
