@@ -24,7 +24,7 @@ export function stripFrontmatter(raw: string): string {
   return raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '')
 }
 
-/** 取正文第一段纯文本，顺带去掉标题、围栏代码和常见 markdown 标记 */
+/** 取正文第一段纯文本，顺带去掉标题、围栏代码和常见 markdown 标记；保留原文换行，仅折叠行内空白 */
 export function firstPara(body: string, max = 0): string {
   const p = body
     .split(/\r?\n\r?\n|\n\n/)
@@ -41,7 +41,10 @@ export function firstPara(body: string, max = 0): string {
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/[*`>#]/g, '')
     .replace(/^\s*[-+]\s+/gm, '')
-    .replace(/\s+/g, ' ')
+    .split('\n')
+    .map((l) => l.replace(/\s+/g, ' ').trim())
+    .filter(Boolean)
+    .join('\n')
     .trim()
   return max > 0 ? text.slice(0, max) : text
 }

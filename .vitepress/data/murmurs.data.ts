@@ -24,7 +24,8 @@ export default createContentLoader('murmurs/*.md', {
           .replace(/[*`>#-]/g, '')
           .replace(/\s+/g, ' ')
           .trim()
-        const slug = url.split('/').filter(Boolean).pop() ?? ''
+        // srcExclude 的 murmur 条目 url 带 .html 后缀(按潜在页面路径),需去掉才能对上 JSON 文件名
+        const slug = (url.split('/').filter(Boolean).pop() ?? '').replace(/\.html$/, '')
         return {
           date: normalizeDate(frontmatter.date) || dateFromUrl(url),
           text: firstPara(body),

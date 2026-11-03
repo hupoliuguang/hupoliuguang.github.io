@@ -55,6 +55,8 @@ function checkOverflow() {
     isLong.value = false
     return
   }
+  // 展开态下预览被隐藏(碎碎念走全文区),跳过重测,保留收起时的行数判定
+  if (!el.offsetHeight) return
   // 测量期间断开 RO，避免「改样式 → RO 触发 → 再改」死循环
   ro?.disconnect()
   // 临时解除 line-clamp，用 Range 数文本真实行数；超过 3 行视为超长
@@ -99,7 +101,14 @@ onBeforeUnmount(() => {
         <span class="hl-tl-date">{{ date }}</span>
         <span v-if="tag" class="hl-tl-tag">{{ tag }}</span>
       </div>
-      <p ref="textEl" class="hl-tl-text" :class="{ 'hl-tl-text--open': expanded }">
+      <p
+        ref="textEl"
+        class="hl-tl-text"
+        :class="{
+          'hl-tl-text--open': expanded && !contentUrl,
+          'hl-tl-text--hide': expanded && contentUrl && !failed
+        }"
+      >
         <a v-if="url" :href="url" class="hl-tl-link">{{ text }}</a>
         <template v-else>{{ text }}</template>
       </p>
@@ -186,6 +195,7 @@ html.dark .hl-tl-card {
   color: var(--hl-text);
   font-size: 15px;
   line-height: 1.7;
+  white-space: pre-wrap;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
@@ -198,6 +208,9 @@ html.dark .hl-tl-card {
   -webkit-line-clamp: unset;
   line-clamp: unset;
   max-height: 800px;
+}
+.hl-tl-text--hide {
+  display: none;
 }
 .hl-tl-link {
   color: inherit;
