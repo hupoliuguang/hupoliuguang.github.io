@@ -5,7 +5,7 @@ import { join } from 'node:path'
 const root = fileURLToPath(new URL('..', import.meta.url))
 const types = {
   log: { dir: 'dev-log', file: (date, slug) => `${date}-${slug}.md` },
-  note: { dir: 'tech-notes', file: (date, slug) => `${slug}.md` },
+  note: { dir: 'tech-notes', file: (date, slug) => `${date}-${slug}.md` },
   murmur: { dir: 'murmurs', file: (date, slug) => `${date}.md` }
 }
 
@@ -44,9 +44,10 @@ const base = spec.file(date, slug)
 let name = base
 for (let i = 2; existsSync(join(dir, name)); i++) name = base.replace(/\.md$/, `-${i}.md`)
 
-const fm = [`date: ${date}`]
-if (title) fm.unshift(`title: ${title}`)
-if (tags) fm.push(`tags: [${tags.split(',').map((t) => t.trim()).filter(Boolean).join(', ')}]`)
+const tagList = tags
+  ? tags.split(',').map((t) => t.trim()).filter(Boolean).join(', ')
+  : ''
+const fm = [`title: ${title}`, `date: ${date}`, `tags: [${tagList}]`]
 const content = `---\n${fm.join('\n')}\n---\n\n`
 
 const file = join(dir, name)
